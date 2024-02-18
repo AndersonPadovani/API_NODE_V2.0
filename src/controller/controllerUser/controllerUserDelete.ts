@@ -9,9 +9,9 @@ export async function ControllerUserDelete(
     response: Response,
     next: NextFunction
 ) {
-    await IsAdmin(request.body.authUserProps.id);
+    // await IsAdmin(request.body.authUserProps.id);
 
-    const { id } = request.body;
+    const { id } = request.body.authUserProps;
 
     await MidUserDelete({ id });
 

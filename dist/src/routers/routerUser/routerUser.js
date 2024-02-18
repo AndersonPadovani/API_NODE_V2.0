@@ -21,6 +21,6 @@ routerUser.post("/user", controllerUserCreate_1.ControllerUserCreate, (request, 
 routerUser.patch("/user", authUser_1.AuthUser, controllerUserUpdate_1.ControllerUserUpdate, (request, response) => {
     response.status(204).json({});
 });
-routerUser.delete("/user", authAdmin_1.AuthAdmin, controllerUserDelete_1.ControllerUserDelete, (request, response) => {
+routerUser.delete("/user", authUser_1.AuthUser, controllerUserDelete_1.ControllerUserDelete, (request, response) => {
     response.status(204).json({});
 });

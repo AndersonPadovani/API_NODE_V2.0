@@ -39,7 +39,7 @@ routerUser.patch(
 
 routerUser.delete(
     "/user",
-    AuthAdmin,
+    AuthUser,
     ControllerUserDelete,
     (request: Request, response: Response) => {
         response.status(204).json({});
