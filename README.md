@@ -9,7 +9,7 @@
 
 <h1>API_NODE_2.0 Documentation</h1>
 
-<h2><a href="https://documenter.getpostman.com/view/9314131/2sA2r824DW#2c2e9701-0c4b-4eab-809a-e574a00b30ee">Documentação no Postman</a></h2>
+<h2><a href="https://documenter.getpostman.com/view/9314131/2sA2r824DW">Documentação no Postman</a></h2>
 
 <h2>Introduction</h2>
 <p>This documentation provides details for the API_NODE_2.0.</p>
