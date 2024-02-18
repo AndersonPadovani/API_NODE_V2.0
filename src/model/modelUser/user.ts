@@ -13,7 +13,6 @@ export type UpdateUserType = {
     email: string;
     phone: string;
     password: string;
-    level: number;
 };
 
 export type authUserPropsType = {

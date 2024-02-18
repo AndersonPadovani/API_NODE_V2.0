@@ -7,8 +7,6 @@ export async function ControllerUserSelectAll(
     response: Response,
     next: NextFunction
 ) {
-    const userProps = request.body.authUserProps as authUserPropsType;
-
     const user = new User();
     const usersProps = await user.selectAllUser();
 

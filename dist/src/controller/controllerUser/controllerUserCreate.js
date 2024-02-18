@@ -4,8 +4,8 @@ exports.ControllerUserCreate = void 0;
 const midUserCreate_1 = require("../../middleware/midUser/midUserCreate/midUserCreate");
 const PasswordEncript_1 = require("../../utils/PasswordEncript");
 const entityUser_1 = require("../../entity/user/entityUser");
-const emailDuplicate_1 = require("./validations/emailDuplicate");
-const phoneDuplicate_1 = require("./validations/phoneDuplicate");
+const emailDuplicate_1 = require("../validations/emailDuplicate");
+const phoneDuplicate_1 = require("../validations/phoneDuplicate");
 async function ControllerUserCreate(request, response, next) {
     const { name, email, phone, password: pass, } = request.body;
     let password = pass;

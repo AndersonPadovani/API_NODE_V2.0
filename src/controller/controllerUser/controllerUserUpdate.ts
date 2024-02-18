@@ -1,29 +1,36 @@
 import { NextFunction, Request, Response } from "express";
 import { UpdateUserType } from "../../model/modelUser/user";
 import { MidUserUpdate } from "../../middleware/midUser/midUserUpdate/midUserUpdate";
-import { ValidateUserEmailDuplicate } from "./validations/emailDuplicate";
-import { ValidateUserPhoneDuplicate } from "./validations/phoneDuplicate";
+import { ValidateUserEmailDuplicate } from "../validations/emailDuplicate";
+import { ValidateUserPhoneDuplicate } from "../validations/phoneDuplicate";
 import { User } from "../../entity/user/entityUser";
 import { PasswordEncript } from "../../utils/PasswordEncript";
-import { StatusUserEnum } from "../../enum/enum";
+import { NotFound, Unautorized } from "../../utils/ApiError";
 
 export async function ControllerUserUpdate(
     request: Request,
     response: Response,
     next: NextFunction
 ) {
-    const {
-        name,
-        email,
-        phone,
-        password: pass,
-        level = StatusUserEnum.user,
-    } = request.body as UpdateUserType;
-    let password = pass;
+    const dbUser = new User();
 
     const { id } = request.body.authUserProps;
 
-    await MidUserUpdate({ id, name, email, phone, password, level });
+    const lastUser = await dbUser.SelectById(id);
+
+    if (!lastUser) {
+        throw new NotFound("Usuario não localizado!");
+    }
+
+    const {
+        name = lastUser.name,
+        email = lastUser.email,
+        phone = lastUser.phone,
+        password: pass = lastUser.password,
+    } = request.body as UpdateUserType;
+    let password = pass;
+
+    await MidUserUpdate({ id, name, email, phone, password });
 
     password = PasswordEncript(pass);
 
@@ -31,6 +38,6 @@ export async function ControllerUserUpdate(
     await ValidateUserPhoneDuplicate(phone, id);
 
     const user = new User();
-    user.Update({ id, name, email, phone, password, level });
+    user.Update({ id, name, email, phone, password });
     next();
 }

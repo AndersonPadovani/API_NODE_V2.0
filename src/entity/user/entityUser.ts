@@ -28,9 +28,9 @@ export class User {
         return stmt;
     }
 
-    async Update({ id, name, email, phone, password, level }: UpdateUserType) {
+    async Update({ id, name, email, phone, password }: UpdateUserType) {
         const stmt = await prisma.user.update({
-            data: { name, email, phone, password, level },
+            data: { name, email, phone, password, updated_at: new Date() },
             where: { id },
         });
 

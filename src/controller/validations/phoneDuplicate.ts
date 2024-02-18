@@ -1,5 +1,5 @@
-import { prisma } from "../../../database/database";
-import { Conflict } from "../../../utils/ApiError";
+import { prisma } from "../../database/database";
+import { Conflict } from "../../utils/ApiError";
 
 export async function ValidateUserPhoneDuplicate(phone: string, id?: string) {
     const resp = await prisma.user.findFirst({ where: { phone } });

@@ -3,8 +3,8 @@ import { CreateUserType } from "../../model/modelUser/user";
 import { MidUserCreate } from "../../middleware/midUser/midUserCreate/midUserCreate";
 import { PasswordEncript } from "../../utils/PasswordEncript";
 import { User } from "../../entity/user/entityUser";
-import { ValidateUserEmailDuplicate } from "./validations/emailDuplicate";
-import { ValidateUserPhoneDuplicate } from "./validations/phoneDuplicate";
+import { ValidateUserEmailDuplicate } from "../validations/emailDuplicate";
+import { ValidateUserPhoneDuplicate } from "../validations/phoneDuplicate";
 
 export async function ControllerUserCreate(
     request: Request,

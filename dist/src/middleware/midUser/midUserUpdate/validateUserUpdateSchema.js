@@ -13,5 +13,4 @@ exports.validateUserUpdateSchema = (0, yup_1.object)({
     password: (0, yup_1.string)()
         .required("Preencha o campo Senha!")
         .min(4, "Sua Senha deve conter pelomenos 4 caracteres!"),
-    level: (0, yup_1.number)().required(),
 });

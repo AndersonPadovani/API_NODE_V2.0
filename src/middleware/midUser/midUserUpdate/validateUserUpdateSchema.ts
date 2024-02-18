@@ -11,5 +11,4 @@ export const validateUserUpdateSchema = object({
     password: string()
         .required("Preencha o campo Senha!")
         .min(4, "Sua Senha deve conter pelomenos 4 caracteres!"),
-    level: number().required(),
 });

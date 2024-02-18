@@ -11,7 +11,7 @@ const authAdmin_1 = require("../../Auth/authAdmin");
 const routerUser = (0, express_1.Router)();
 exports.routerUser = routerUser;
 routerUser.get("/user", authAdmin_1.AuthAdmin, controllerUserSelectAll_1.ControllerUserSelectAll, (request, response) => {
-    const userProps = request.body.authUserProps;
+    const userProps = request.body.DataUser;
     // response.status(200).json(request.body.DataJwt);
     response.status(200).json(userProps);
 });

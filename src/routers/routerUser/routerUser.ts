@@ -14,7 +14,7 @@ routerUser.get(
     AuthAdmin,
     ControllerUserSelectAll,
     (request: Request, response: Response) => {
-        const userProps = request.body.authUserProps as authUserPropsType;
+        const userProps = request.body.DataUser as authUserPropsType;
         // response.status(200).json(request.body.DataJwt);
         response.status(200).json(userProps);
     }

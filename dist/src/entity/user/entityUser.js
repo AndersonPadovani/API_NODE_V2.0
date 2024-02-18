@@ -24,9 +24,9 @@ class User {
         const stmt = await database_1.prisma.user.delete({ where: { id } });
         return stmt;
     }
-    async Update({ id, name, email, phone, password, level }) {
+    async Update({ id, name, email, phone, password }) {
         const stmt = await database_1.prisma.user.update({
-            data: { name, email, phone, password, level },
+            data: { name, email, phone, password, updated_at: new Date() },
             where: { id },
         });
         return stmt;
