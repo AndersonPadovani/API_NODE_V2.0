@@ -3,52 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API_NODE_2.0 Documentation</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
 
-        h1, h2, h3 {
-            color: #333;
-        }
-
-        h2 {
-            margin-top: 30px;
-        }
-
-        h3 {
-            margin-top: 20px;
-        }
-
-        pre {
-            background-color: #282c34;
-            color: #abb2bf;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-
-        code {
-            color: #61dafb;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-    </style>
 </head>
 <body>
 
 <h1>API_NODE_2.0 Documentation</h1>
+
+<h2><a href="https://documenter.getpostman.com/view/9314131/2sA2r824DW#2c2e9701-0c4b-4eab-809a-e574a00b30ee">Documentação no Postman</a></h2>
 
 <h2>Introduction</h2>
 <p>This documentation provides details for the API_NODE_2.0.</p>
@@ -152,7 +113,7 @@
     <pre>
 <code>
 {
-    "email": "andersonpadovani@protonmail.com",
+    "email": "admin@admin.com",
     "password": "admin"
 }
 </code>
