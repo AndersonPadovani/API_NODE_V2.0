@@ -20,7 +20,6 @@ const newUpdateUser = {
     password: "teste2",
 };
 let jwtUser = "";
-const jwtInvalid = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQQVlMT0FEIjp7ImlkIjoiZDVhMzA5MGMtNDY4YS00OTg0LTk4NDgtMDlkN2NiMTM3MWJiIiwibmFtZSI6InRlc3RlMiIsImVtYWlsIjoidGVzdGUyQHRlc3RlLmNvbS5iciIsInBob25lIjoiKDExKSAxIDExMTEtMTExMSIsImNyZWF0ZWRfYXQiOiIyMDI0LTAyLTE4VDIxOjExOjA5Ljk5MloiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wMi0xOFQyMToxMToxMC4wMTBaIn0sImlhdCI6MTcwODI5MDY5NiwiZXhwIjoxNzA4Mjk0Mjk2fQ.zYX6AoskfKgM0dGowV04F6HsNs2Vq9NWtW-Co8I3QsM";
 axios_1.default.interceptors.response.use((response) => response, (error) => {
     if (error.response && error.response.status === 409) {
         // Se for um erro 409, retorne a resposta
@@ -95,14 +94,6 @@ axios_1.default.interceptors.response.use((response) => response, (error) => {
     });
     (0, vitest_1.expect)(status).toEqual(204);
 });
-(0, vitest_1.test)("Não deve Deleta o usuario id do token invalido", async () => {
-    const { status } = await (0, axios_1.default)({
-        baseURL: process.env.BASE_URL + "/user",
-        method: "delete",
-        headers: { Authorization: `Bearer ${jwtInvalid}` },
-    });
-    (0, vitest_1.expect)(status).toEqual(404);
-});
 (0, vitest_1.test)("Deleta o usuario teste do banco de dados!", async () => {
     const { status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL + "/user",
@@ -110,4 +101,14 @@ axios_1.default.interceptors.response.use((response) => response, (error) => {
         headers: { Authorization: `Bearer ${jwtUser}` },
     });
     (0, vitest_1.expect)(status).toEqual(204);
+});
+(0, vitest_1.test)("Não deve Deletar o usuario id do token invalido", async () => {
+    const { data, status } = await (0, axios_1.default)({
+        baseURL: process.env.BASE_URL + "/user",
+        method: "delete",
+        headers: {
+            Authorization: `Bearer ${jwtUser}`,
+        },
+    });
+    (0, vitest_1.expect)(status).toEqual(404);
 });

@@ -5,7 +5,6 @@ const midUserDelete_1 = require("../../middleware/midUser/midUserDelete/midUserD
 const entityUser_1 = require("../../entity/user/entityUser");
 const selectById_1 = require("../validations/selectById");
 async function ControllerUserDelete(request, response, next) {
-    // await IsAdmin(request.body.authUserProps.id);
     const { id } = request.body.authUserProps;
     await (0, midUserDelete_1.MidUserDelete)({ id });
     await (0, selectById_1.ValidateUserDeleteById)(id);

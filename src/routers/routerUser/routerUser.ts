@@ -6,6 +6,7 @@ import { ControllerUserSelectAll } from "../../controller/controllerUser/control
 import { AuthUser } from "../../Auth/authUser";
 import { authUserPropsType } from "../../model/modelUser/user";
 import { AuthAdmin } from "../../Auth/authAdmin";
+import { ControllerUserForgout } from "../../controller/controllerUser/controllerUserForgout";
 
 const routerUser = Router();
 
@@ -23,6 +24,14 @@ routerUser.get(
 routerUser.post(
     "/user",
     ControllerUserCreate,
+    (request: Request, response: Response) => {
+        response.status(201).json({});
+    }
+);
+
+routerUser.post(
+    "/forgout",
+    ControllerUserForgout,
     (request: Request, response: Response) => {
         response.status(201).json({});
     }

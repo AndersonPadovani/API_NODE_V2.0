@@ -1,11 +1,16 @@
 import Jwt from "jsonwebtoken";
 import { Unautorized } from "../utils/ApiError";
+import { JwtExpire } from "../enum/enum";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function CreateJwt(payload: any): Promise<string> {
+export async function CreateJwt(
+    payload: any,
+    expire?: JwtExpire
+): Promise<string> {
+    const timeExpire = expire && "1H";
     const { password, ...PAYLOAD } = payload;
     return Jwt.sign({ PAYLOAD }, process.env.JWT_PASSWORD!, {
-        expiresIn: "1H",
+        expiresIn: timeExpire,
     });
 }
 

@@ -1,5 +1,3 @@
-import { object, string } from "yup";
-
 export type CreateUserType = {
     name: string;
     email: string;
@@ -13,6 +11,10 @@ export type UpdateUserType = {
     email: string;
     phone: string;
     password: string;
+};
+
+export type ForgoutPassByEmail = {
+    email: string;
 };
 
 export type authUserPropsType = {

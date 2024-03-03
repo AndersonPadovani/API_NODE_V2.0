@@ -18,10 +18,11 @@ exports.ValidateJwtToken = exports.CreateJwt = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const ApiError_1 = require("../utils/ApiError");
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function CreateJwt(payload) {
+async function CreateJwt(payload, expire) {
+    const timeExpire = expire && "1H";
     const { password } = payload, PAYLOAD = __rest(payload, ["password"]);
     return jsonwebtoken_1.default.sign({ PAYLOAD }, process.env.JWT_PASSWORD, {
-        expiresIn: "1H",
+        expiresIn: timeExpire,
     });
 }
 exports.CreateJwt = CreateJwt;

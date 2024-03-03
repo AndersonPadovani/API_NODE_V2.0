@@ -5,11 +5,15 @@ API_STATUS=200
 API_AUTHOR="ARP Dev solutions"
 API_CONTACT="andersonpadovani@protonmail.com"
 
-BASE_URL=""
+BASE_URL="http://localhost:1533"
 
 SERVER_PORT=1533
 
-JWT_PASSWORD=""
+JWT_PASSWORD="d033e22ae348aeb5660fc2140aec35850c4da997"
+
+SMTP_HOST=""
+SMTP_EMAIL=""
+SMTP_PASS=""
 
 
 DATABASE_URL="mysql://root:@localhost:3306/api2"

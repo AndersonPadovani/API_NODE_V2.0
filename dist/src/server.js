@@ -34,6 +34,11 @@ const middlewareErrors_1 = require("./middleware/errors/middlewareErrors");
 const PORT = process.env.SERVER_PORT || 5000;
 const App = (0, express_1.default)();
 App.use(express_1.default.json());
+App.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 App.use(Routers.appRouter);
 App.use(middlewareErrors_1.MidErrorsApi);
 App.listen(PORT || 3000, () => {

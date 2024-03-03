@@ -1,6 +1,7 @@
 import axios from "axios";
 import { describe, test, expect } from "vitest";
 import { User } from "../entity/user/entityUser";
+import { CreateJwt } from "../Auth/authJwt";
 
 const user = new User();
 
@@ -19,8 +20,6 @@ const newUpdateUser = {
 };
 
 let jwtUser = "";
-const jwtInvalid =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQQVlMT0FEIjp7ImlkIjoiZDVhMzA5MGMtNDY4YS00OTg0LTk4NDgtMDlkN2NiMTM3MWJiIiwibmFtZSI6InRlc3RlMiIsImVtYWlsIjoidGVzdGUyQHRlc3RlLmNvbS5iciIsInBob25lIjoiKDExKSAxIDExMTEtMTExMSIsImNyZWF0ZWRfYXQiOiIyMDI0LTAyLTE4VDIxOjExOjA5Ljk5MloiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wMi0xOFQyMToxMToxMC4wMTBaIn0sImlhdCI6MTcwODI5MDY5NiwiZXhwIjoxNzA4Mjk0Mjk2fQ.zYX6AoskfKgM0dGowV04F6HsNs2Vq9NWtW-Co8I3QsM";
 
 axios.interceptors.response.use(
     (response) => response,
@@ -117,16 +116,6 @@ test("Atualiza o suaurio teste no banco de dados!", async () => {
     expect(status).toEqual(204);
 });
 
-test("Não deve Deleta o usuario id do token invalido", async () => {
-    const { status } = await axios({
-        baseURL: process.env.BASE_URL + "/user",
-        method: "delete",
-        headers: { Authorization: `Bearer ${jwtInvalid}` },
-    });
-
-    expect(status).toEqual(404);
-});
-
 test("Deleta o usuario teste do banco de dados!", async () => {
     const { status } = await axios({
         baseURL: process.env.BASE_URL + "/user",
@@ -135,4 +124,16 @@ test("Deleta o usuario teste do banco de dados!", async () => {
     });
 
     expect(status).toEqual(204);
+});
+
+test("Não deve Deletar o usuario id do token invalido", async () => {
+    const { data, status } = await axios({
+        baseURL: process.env.BASE_URL + "/user",
+        method: "delete",
+        headers: {
+            Authorization: `Bearer ${jwtUser}`,
+        },
+    });
+
+    expect(status).toEqual(404);
 });
