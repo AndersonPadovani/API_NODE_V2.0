@@ -22,3 +22,11 @@ model User {
 
   @@map("users")
 }
+
+model JwtToken {
+  id   String @id @unique @default(uuid())
+  jti  String @unique
+  used Int    @default(0)
+
+  @@map("jwt_token")
+}

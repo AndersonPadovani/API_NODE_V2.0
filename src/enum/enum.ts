@@ -9,3 +9,8 @@ export enum JwtExpire {
     umaHora = "1h",
     duasHoras = "2h",
 }
+
+export enum JwtValidEnum {
+    VALID = 0,
+    INVALID = 1,
+}

@@ -1,8 +1,13 @@
 import { prisma } from "../../database/database";
-import { CreateUserType, UpdateUserType } from "../../model/modelUser/user";
+import {
+    CreateUserType,
+    UpdateUserPassword,
+    UpdateUserType,
+} from "../../model/modelUser/user";
 
 export class User {
     constructor() {}
+
     async selectAllUser() {
         const stmt = await prisma.user.findMany();
         return stmt;
@@ -32,6 +37,15 @@ export class User {
         const stmt = await prisma.user.update({
             data: { name, email, phone, password, updated_at: new Date() },
             where: { id },
+        });
+
+        return stmt;
+    }
+
+    async UpdatePasswordByEmail({ email, password }: UpdateUserPassword) {
+        const stmt = await prisma.user.update({
+            data: { password, updated_at: new Date() },
+            where: { email },
         });
 
         return stmt;

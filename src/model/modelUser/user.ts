@@ -5,6 +5,11 @@ export type CreateUserType = {
     password: string;
 };
 
+export type UpdateUserPassword = {
+    email: string;
+    password: string;
+};
+
 export type UpdateUserType = {
     id: string;
     name: string;
@@ -13,8 +18,13 @@ export type UpdateUserType = {
     password: string;
 };
 
-export type ForgoutPassByEmail = {
+export type ForgoutPassByEmailType = {
     email: string;
+};
+
+export type ForgoutTokenType = {
+    forgoutToken: string;
+    password: string;
 };
 
 export type authUserPropsType = {

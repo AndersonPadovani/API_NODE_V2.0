@@ -9,6 +9,7 @@ const controllerUserSelectAll_1 = require("../../controller/controllerUser/contr
 const authUser_1 = require("../../Auth/authUser");
 const authAdmin_1 = require("../../Auth/authAdmin");
 const controllerUserForgout_1 = require("../../controller/controllerUser/controllerUserForgout");
+const controlerUserChangePass_1 = require("../../controller/controllerUser/controlerUserChangePass");
 const routerUser = (0, express_1.Router)();
 exports.routerUser = routerUser;
 routerUser.get("/user", authAdmin_1.AuthAdmin, controllerUserSelectAll_1.ControllerUserSelectAll, (request, response) => {
@@ -20,6 +21,10 @@ routerUser.post("/user", controllerUserCreate_1.ControllerUserCreate, (request, 
     response.status(201).json({});
 });
 routerUser.post("/forgout", controllerUserForgout_1.ControllerUserForgout, (request, response) => {
+    response.status(200).json({});
+});
+routerUser.post("/changePass", controlerUserChangePass_1.ControllerUserChangePass, (request, response) => {
+    //forgoutToken
     response.status(201).json({});
 });
 routerUser.patch("/user", authUser_1.AuthUser, controllerUserUpdate_1.ControllerUserUpdate, (request, response) => {

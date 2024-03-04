@@ -31,6 +31,13 @@ class User {
         });
         return stmt;
     }
+    async UpdatePasswordByEmail({ email, password }) {
+        const stmt = await database_1.prisma.user.update({
+            data: { password, updated_at: new Date() },
+            where: { email },
+        });
+        return stmt;
+    }
     async Create({ name, email, phone, password }) {
         const stmt = await database_1.prisma.user.create({
             data: {

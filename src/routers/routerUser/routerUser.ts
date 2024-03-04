@@ -7,6 +7,8 @@ import { AuthUser } from "../../Auth/authUser";
 import { authUserPropsType } from "../../model/modelUser/user";
 import { AuthAdmin } from "../../Auth/authAdmin";
 import { ControllerUserForgout } from "../../controller/controllerUser/controllerUserForgout";
+import { MidForgoutChangePass } from "../../middleware/midUser/midUserChangePass/midUserChangePass";
+import { ControllerUserChangePass } from "../../controller/controllerUser/controlerUserChangePass";
 
 const routerUser = Router();
 
@@ -33,6 +35,15 @@ routerUser.post(
     "/forgout",
     ControllerUserForgout,
     (request: Request, response: Response) => {
+        response.status(200).json({});
+    }
+);
+
+routerUser.post(
+    "/changePass",
+    ControllerUserChangePass,
+    (request: Request, response: Response) => {
+        //forgoutToken
         response.status(201).json({});
     }
 );
