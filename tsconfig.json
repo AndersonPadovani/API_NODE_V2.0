@@ -2,8 +2,9 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
-    "outDir": "dist",
+    "outDir": "dist", // Onde os arquivos compilados serão armazenados
     "esModuleInterop": true
   },
-  "include": ["src/server.ts"]
+  "include": ["src/**/*.ts"], // Inclui arquivos TypeScript no diretório src
+  "exclude": ["dist"] // Exclui a pasta de saída da build
 }

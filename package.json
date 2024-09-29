@@ -10,7 +10,7 @@
     "migrations": "npx prisma migrate dev",
     "prisma": "npx prisma studio",
     "build": "tsc",
-    "start": "node dist/src/server.js"
+    "start": "node ./dist/src/server.js"
   },
   "keywords": [],
   "author": "",
