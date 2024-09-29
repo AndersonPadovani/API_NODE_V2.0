@@ -8,7 +8,9 @@
     "dev": "npx node --watch ./dist/src/server.js",
     "test": "vitest --ui",
     "migrations": "npx prisma migrate dev",
-    "prisma": "npx prisma studio"
+    "prisma": "npx prisma studio",
+    "build": "tsc",
+    "start": "node dist/src/server.js"
   },
   "keywords": [],
   "author": "",
