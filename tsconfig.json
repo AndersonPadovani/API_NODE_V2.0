@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "outDir": "dist", // Onde os arquivos compilados serão armazenados
-    "esModuleInterop": true
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true, // Pode ajudar a ignorar tipos de bibliotecas que estão causando conflitos
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react", // Ou outro valor dependendo do seu framework
+    "types": ["vite/client"] // Adiciona os tipos do Vite
   },
-  "include": ["src/**/*.ts"], // Inclui arquivos TypeScript no diretório src
-  "exclude": ["dist"] // Exclui a pasta de saída da build
+  "include": ["src/**/*.ts", "src/**/*.tsx"], // Inclui seus arquivos TypeScript
+  "exclude": ["node_modules", "dist"] // Exclui node_modules e dist
 }
