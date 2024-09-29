@@ -17,4 +17,4 @@ SMTP_EMAIL=""
 SMTP_PASS=""
 
 
-DATABASE_URL="mysql://root:@localhost:3306/api2"
+DATABASE_URL="postgresql://dev:dev@127.0.0.1:5432/api2"
