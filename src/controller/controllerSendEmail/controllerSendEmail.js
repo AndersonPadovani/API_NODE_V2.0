@@ -1,28 +1,29 @@
-import * as NodeMailer from "nodemailer";
+import * as SendEmail from "nodemailer";
 import { BadRequest } from "../../utils/ApiError";
-
 export class ControllerSendEmail {
-  private transporter;
-
-  constructor() {
-    this.transporter = NodeMailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: false, // Use `true` for port 465, `false` for all other ports
-      auth: {
-        user: process.env.SMTP_EMAIL,
-        pass: process.env.SMTP_PASS,
-      },
-    } as NodeMailer.TransportOptions);
-  }
-
-  public async Send(email: string, link: string): Promise<boolean | void> {
-    await this.transporter
-      .sendMail({
-        from: process.env.SMTP_EMAIL, // sender address
-        to: email, // list of receivers
-        subject: "✔ Forgout you password", // Subject line
-        html: `<!DOCTYPE html>
+    transporter;
+    constructor() {
+        this.transporter = SendEmail.createTransport({
+            service: "hotmail",
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            secure: false, // Use `true` for port 465, `false` for all other ports
+            auth: {
+                user: process.env.SMTP_USER_EMAIL,
+                pass: `${process.env.SMTP_USER_PASS}`,
+            },
+            tls: {
+                ciphers: "SSLv3",
+            },
+        });
+    }
+    async Send(email, link) {
+        await this.transporter
+            .sendMail({
+            from: process.env.SMTP_USER_EMAIL, // sender address
+            to: email, // list of receivers
+            subject: "✔ Forgout you password", // Subject line
+            html: `<!DOCTYPE html>
             <html lang="en">
             <head>
               <meta charset="UTF-8">
@@ -63,15 +64,12 @@ export class ControllerSendEmail {
               </div>
             </body>
             </html>`, // html body
-      })
-      .then((resp) => {
-        return true;
-      })
-      .catch((error) => {
-        throw new BadRequest(
-          "Falha ao enviar email de recuperação, tente novamente mais tardes!\n" +
-            error
-        );
-      });
-  }
+        })
+            .then((resp) => {
+            return true;
+        })
+            .catch((error) => {
+            throw new BadRequest("Falha ao enviar email de recuperação, tente novamente mais tardes!");
+        });
+    }
 }
