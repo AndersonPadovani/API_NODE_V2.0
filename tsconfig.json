@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "strict": true,
+    "target": "es2020", // ou "esnext"
+    "module": "CommonJS", // ou "es2020"
     "esModuleInterop": true,
-    "skipLibCheck": true, // Pode ajudar a ignorar tipos de bibliotecas que estão causando conflitos
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react", // Ou outro valor dependendo do seu framework
-    "types": ["vite/client"] // Adiciona os tipos do Vite
-  },
-  "include": ["src/**/*.ts", "src/**/*.tsx"], // Inclui seus arquivos TypeScript
-  "exclude": ["node_modules", "dist"] // Exclui node_modules e dist
+    "strict": true,
+    "skipLibCheck": true
+  }
 }

@@ -1,22 +1,25 @@
-import { BadRequest, Unautorized } from "../utils/ApiError";
-import { ValidateJwtToken } from "./authJwt";
-import { StatusUserEnum } from "../enum/enum";
-import { prisma } from "../database/database";
-export async function AuthAdmin(request, response, next) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthAdmin = AuthAdmin;
+const ApiError_1 = require("../utils/ApiError");
+const authJwt_1 = require("./authJwt");
+const enum_1 = require("../enum/enum");
+const database_1 = require("../database/database");
+async function AuthAdmin(request, response, next) {
     const authorization = request.headers.authorization;
     if (!authorization) {
-        throw new BadRequest("Bearer Token não informado!");
+        throw new ApiError_1.BadRequest("Bearer Token não informado!");
     }
     const [, token] = authorization.split(" ");
-    const { PAYLOAD } = await ValidateJwtToken(token);
-    const userProps = await prisma.user.findUnique({
+    const { PAYLOAD } = await (0, authJwt_1.ValidateJwtToken)(token);
+    const userProps = await database_1.prisma.user.findUnique({
         where: { id: PAYLOAD.id },
     });
     if (!userProps) {
-        throw new Unautorized(`${PAYLOAD.email} usuario não cadastrado!`);
+        throw new ApiError_1.Unautorized(`${PAYLOAD.email} usuario não cadastrado!`);
     }
-    if (userProps.level < StatusUserEnum.admin) {
-        throw new Unautorized(`${userProps.email} não e um administrador!`);
+    if (userProps.level < enum_1.StatusUserEnum.admin) {
+        throw new ApiError_1.Unautorized(`${userProps.email} não e um administrador!`);
     }
     request.body.authUserProps = PAYLOAD;
     next();

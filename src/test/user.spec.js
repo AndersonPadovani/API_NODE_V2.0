@@ -1,7 +1,12 @@
-import axios from "axios";
-import { test, expect } from "vitest";
-import { User } from "../entity/user/entityUser";
-const user = new User();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(require("axios"));
+const vitest_1 = require("vitest");
+const entityUser_1 = require("../entity/user/entityUser");
+const user = new entityUser_1.User();
 const newUser = {
     name: "teste",
     email: "teste@teste.com.br",
@@ -15,7 +20,7 @@ const newUpdateUser = {
     password: "teste2",
 };
 let jwtUser = "";
-axios.interceptors.response.use((response) => response, (error) => {
+axios_1.default.interceptors.response.use((response) => response, (error) => {
     if (error.response && error.response.status === 409) {
         // Se for um erro 409, retorne a resposta
         return Promise.resolve(error.response);
@@ -31,33 +36,33 @@ axios.interceptors.response.use((response) => response, (error) => {
     // Para outros erros, rejeite a Promise normalmente
     return Promise.reject(error);
 });
-test("Testa se o servidor esta online", async () => {
-    const { data, status } = await axios({
+(0, vitest_1.test)("Testa se o servidor esta online", async () => {
+    const { data, status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL,
         method: "get",
     });
-    expect(status).toEqual(200);
-    expect(data.name).toEqual(process.env.API_NAME);
+    (0, vitest_1.expect)(status).toEqual(200);
+    (0, vitest_1.expect)(data.name).toEqual(process.env.API_NAME);
 });
-test("Criar um usuario no banco de dados!", async () => {
-    const { status } = await axios({
+(0, vitest_1.test)("Criar um usuario no banco de dados!", async () => {
+    const { status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL + "/user",
         method: "post",
         data: newUser,
     });
-    expect(status).toEqual(201);
+    (0, vitest_1.expect)(status).toEqual(201);
 });
-test("Não cria usuario duplicado", async () => {
-    const { data, status } = await axios({
+(0, vitest_1.test)("Não cria usuario duplicado", async () => {
+    const { data, status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL + "/user",
         method: "post",
         data: newUser,
     });
-    expect(data.message).toEqual("teste@teste.com.br já cadastrado no sistema!");
-    expect(status).toEqual(409);
+    (0, vitest_1.expect)(data.message).toEqual("teste@teste.com.br já cadastrado no sistema!");
+    (0, vitest_1.expect)(status).toEqual(409);
 });
-test("Não deve conseguir Logar na aplicação com o email e senha errado", async () => {
-    const { data, status } = await axios({
+(0, vitest_1.test)("Não deve conseguir Logar na aplicação com o email e senha errado", async () => {
+    const { data, status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL + "/login/email",
         method: "post",
         data: {
@@ -65,10 +70,10 @@ test("Não deve conseguir Logar na aplicação com o email e senha errado", asyn
             password: "1234",
         },
     });
-    expect(status).toEqual(401);
+    (0, vitest_1.expect)(status).toEqual(401);
 });
-test("Login na aplicação com o email e senha do usuario teste", async () => {
-    const { data, status } = await axios({
+(0, vitest_1.test)("Login na aplicação com o email e senha do usuario teste", async () => {
+    const { data, status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL + "/login/email",
         method: "post",
         data: {
@@ -77,33 +82,33 @@ test("Login na aplicação com o email e senha do usuario teste", async () => {
         },
     });
     jwtUser = data.JWT;
-    expect(jwtUser).not.toBeNull();
-    expect(status).toEqual(200);
+    (0, vitest_1.expect)(jwtUser).not.toBeNull();
+    (0, vitest_1.expect)(status).toEqual(200);
 });
-test("Atualiza o suaurio teste no banco de dados!", async () => {
-    const { status } = await axios({
+(0, vitest_1.test)("Atualiza o suaurio teste no banco de dados!", async () => {
+    const { status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL + "/user",
         method: "patch",
         headers: { Authorization: `Bearer ${jwtUser}` },
         data: newUpdateUser,
     });
-    expect(status).toEqual(204);
+    (0, vitest_1.expect)(status).toEqual(204);
 });
-test("Deleta o usuario teste do banco de dados!", async () => {
-    const { status } = await axios({
+(0, vitest_1.test)("Deleta o usuario teste do banco de dados!", async () => {
+    const { status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL + "/user",
         method: "delete",
         headers: { Authorization: `Bearer ${jwtUser}` },
     });
-    expect(status).toEqual(204);
+    (0, vitest_1.expect)(status).toEqual(204);
 });
-test("Não deve Deletar o usuario id do token invalido", async () => {
-    const { data, status } = await axios({
+(0, vitest_1.test)("Não deve Deletar o usuario id do token invalido", async () => {
+    const { data, status } = await (0, axios_1.default)({
         baseURL: process.env.BASE_URL + "/user",
         method: "delete",
         headers: {
             Authorization: `Bearer ${jwtUser}`,
         },
     });
-    expect(status).toEqual(404);
+    (0, vitest_1.expect)(status).toEqual(404);
 });

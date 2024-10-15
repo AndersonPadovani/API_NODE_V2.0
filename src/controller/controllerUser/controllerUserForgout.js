@@ -1,22 +1,25 @@
-import { MidForgoutByEmail } from "../../middleware/midUser/midUserForgout/midForgoutByEmail";
-import { User } from "../../entity/user/entityUser";
-import { NotFound } from "../../utils/ApiError";
-import { CreateJwtResePass } from "../../Auth/authJwt";
-import { ControllerSendEmail } from "../controllerSendEmail/controllerSendEmail";
-export async function ControllerUserForgout(request, response, next) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ControllerUserForgout = ControllerUserForgout;
+const midForgoutByEmail_1 = require("../../middleware/midUser/midUserForgout/midForgoutByEmail");
+const entityUser_1 = require("../../entity/user/entityUser");
+const ApiError_1 = require("../../utils/ApiError");
+const authJwt_1 = require("../../Auth/authJwt");
+const controllerSendEmail_1 = require("../controllerSendEmail/controllerSendEmail");
+async function ControllerUserForgout(request, response, next) {
     const { email } = request.body;
-    await MidForgoutByEmail({ email });
-    const user = new User();
+    await (0, midForgoutByEmail_1.MidForgoutByEmail)({ email });
+    const user = new entityUser_1.User();
     const validateEmail = await user.SelectByEmail(email);
     if (!validateEmail) {
-        throw new NotFound(`${email} não cadastrado no sistema!`);
+        throw new ApiError_1.NotFound(`${email} não cadastrado no sistema!`);
     }
-    const jwtForgoutCreate = await CreateJwtResePass({
+    const jwtForgoutCreate = await (0, authJwt_1.CreateJwtResePass)({
         id: validateEmail.id,
         email: validateEmail.email,
     });
     const forgoutLink = `${process.env.BASE_URL_FRONT_END}/change_pass?forgoutToken=${jwtForgoutCreate}`;
-    const sendEmail = new ControllerSendEmail();
+    const sendEmail = new controllerSendEmail_1.ControllerSendEmail();
     await sendEmail.Send(email, forgoutLink);
     next();
 }

@@ -1,5 +1,9 @@
-import { Router } from "express";
-const appRouter = Router();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.appRouter = void 0;
+const express_1 = require("express");
+const appRouter = (0, express_1.Router)();
+exports.appRouter = appRouter;
 appRouter.get("/", (req, res) => {
     res.status(200).json({
         mode: process.env.API_MODE,
@@ -10,4 +14,3 @@ appRouter.get("/", (req, res) => {
         contact: process.env.API_CONTACT,
     });
 });
-export { appRouter };

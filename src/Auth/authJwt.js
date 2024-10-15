@@ -1,16 +1,24 @@
-import Jwt from "jsonwebtoken";
-import { Unautorized } from "../utils/ApiError";
-import { JwtToken } from "../entity/jwtToken/jwtToken";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CreateJwt = CreateJwt;
+exports.ValidateJwtToken = ValidateJwtToken;
+exports.CreateJwtResePass = CreateJwtResePass;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const ApiError_1 = require("../utils/ApiError");
+const jwtToken_1 = require("../entity/jwtToken/jwtToken");
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function CreateJwt(payload) {
+async function CreateJwt(payload) {
     const { password, ...PAYLOAD } = payload;
-    return Jwt.sign({ PAYLOAD }, process.env.JWT_PASSWORD, {
+    return jsonwebtoken_1.default.sign({ PAYLOAD }, process.env.JWT_PASSWORD, {
         expiresIn: "1H",
     });
 }
-export async function ValidateJwtToken(token) {
+async function ValidateJwtToken(token) {
     return new Promise(async (resolve, reject) => {
-        Jwt.verify(token, process.env.JWT_PASSWORD, async (err, decode) => {
+        jsonwebtoken_1.default.verify(token, process.env.JWT_PASSWORD, async (err, decode) => {
             if (err) {
                 reject(err.message);
             }
@@ -18,7 +26,7 @@ export async function ValidateJwtToken(token) {
         });
     });
 }
-export async function CreateJwtResePass(PAYLOAD) {
+async function CreateJwtResePass(PAYLOAD) {
     // ID exclusivo para o token
     const jti = Math.random().toString(36).substring(7);
     // Expiração em 5 minutos (ajuste conforme necessário)
@@ -28,12 +36,12 @@ export async function CreateJwtResePass(PAYLOAD) {
         exp: expiracao,
         PAYLOAD,
     };
-    const token = Jwt.sign(data, process.env.JWT_PASSWORD);
+    const token = jsonwebtoken_1.default.sign(data, process.env.JWT_PASSWORD);
     if (token) {
-        const jwtSave = new JwtToken();
+        const jwtSave = new jwtToken_1.JwtToken();
         const validate = await jwtSave.Select(jti);
         if (validate) {
-            throw new Unautorized("Jwt já cadastrado!");
+            throw new ApiError_1.Unautorized("Jwt já cadastrado!");
         }
         await jwtSave.Save(jti);
     }

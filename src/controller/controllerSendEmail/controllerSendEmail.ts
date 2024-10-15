@@ -64,10 +64,10 @@ export class ControllerSendEmail {
             </body>
             </html>`, // html body
       })
-      .then((resp) => {
+      .then((resp: any) => {
         return true;
       })
-      .catch((error) => {
+      .catch((error: string) => {
         throw new BadRequest(
           "Falha ao enviar email de recuperação, tente novamente mais tardes!\n" +
             error

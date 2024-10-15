@@ -1,32 +1,40 @@
-export class ApiError extends Error {
-    statusCode;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NotFound = exports.Unautorized = exports.InternalServerError = exports.Conflict = exports.BadRequest = exports.ApiError = void 0;
+class ApiError extends Error {
     constructor(erroMessage, statusCode) {
         super(erroMessage);
         this.statusCode = statusCode;
     }
 }
-export class BadRequest extends ApiError {
+exports.ApiError = ApiError;
+class BadRequest extends ApiError {
     constructor(errorMessage) {
         super(errorMessage, 400);
     }
 }
-export class Conflict extends ApiError {
+exports.BadRequest = BadRequest;
+class Conflict extends ApiError {
     constructor(errorMessage) {
         super(errorMessage, 409);
     }
 }
-export class InternalServerError extends ApiError {
+exports.Conflict = Conflict;
+class InternalServerError extends ApiError {
     constructor(errorMessage) {
         super(errorMessage, 500);
     }
 }
-export class Unautorized extends ApiError {
+exports.InternalServerError = InternalServerError;
+class Unautorized extends ApiError {
     constructor(errorMessage) {
         super(errorMessage, 401);
     }
 }
-export class NotFound extends ApiError {
+exports.Unautorized = Unautorized;
+class NotFound extends ApiError {
     constructor(errorMessage) {
         super(errorMessage, 404);
     }
 }
+exports.NotFound = NotFound;

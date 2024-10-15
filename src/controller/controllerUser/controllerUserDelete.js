@@ -1,11 +1,14 @@
-import { MidUserDelete } from "../../middleware/midUser/midUserDelete/midUserDelete";
-import { User } from "../../entity/user/entityUser";
-import { ValidateUserDeleteById } from "../validations/selectById";
-export async function ControllerUserDelete(request, response, next) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ControllerUserDelete = ControllerUserDelete;
+const midUserDelete_1 = require("../../middleware/midUser/midUserDelete/midUserDelete");
+const entityUser_1 = require("../../entity/user/entityUser");
+const selectById_1 = require("../validations/selectById");
+async function ControllerUserDelete(request, response, next) {
     const { id } = request.body.authUserProps;
-    await MidUserDelete({ id });
-    await ValidateUserDeleteById(id);
-    const user = new User();
+    await (0, midUserDelete_1.MidUserDelete)({ id });
+    await (0, selectById_1.ValidateUserDeleteById)(id);
+    const user = new entityUser_1.User();
     user.Delete(id);
     next();
 }
