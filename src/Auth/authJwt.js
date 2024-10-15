@@ -43,7 +43,7 @@ async function CreateJwtResePass(PAYLOAD) {
         if (validate) {
             throw new ApiError_1.Unautorized("Jwt já cadastrado!");
         }
-        await jwtSave.Save(jti);
+        await jwtSave.Save({ jti, uId: PAYLOAD.id });
     }
     return token;
 }

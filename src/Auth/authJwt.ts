@@ -2,6 +2,11 @@ import Jwt from "jsonwebtoken";
 import { Unautorized } from "../utils/ApiError";
 import { JwtToken } from "../entity/jwtToken/jwtToken";
 
+type PAYLOADType = {
+  id: string;
+  email: string;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function CreateJwt(payload: any): Promise<string> {
   const { password, ...PAYLOAD } = payload;
@@ -22,7 +27,7 @@ export async function ValidateJwtToken(token: string): Promise<any> {
   });
 }
 
-export async function CreateJwtResePass(PAYLOAD: any) {
+export async function CreateJwtResePass(PAYLOAD: PAYLOADType) {
   // ID exclusivo para o token
   const jti = Math.random().toString(36).substring(7);
 
@@ -43,7 +48,7 @@ export async function CreateJwtResePass(PAYLOAD: any) {
     if (validate) {
       throw new Unautorized("Jwt já cadastrado!");
     }
-    await jwtSave.Save(jti);
+    await jwtSave.Save({ jti, uId: PAYLOAD.id });
   }
 
   return token;

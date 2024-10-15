@@ -4,12 +4,16 @@ exports.JwtToken = void 0;
 const database_1 = require("../../database/database");
 class JwtToken {
     constructor() { }
-    async Save(jti) {
-        const stmt = await database_1.prisma.jwtToken.create({ data: { jti } });
+    async Save({ jti, uId }) {
+        const stmt = await database_1.prisma.jwtToken.create({ data: { jti, uId } });
         return stmt;
     }
     async Select(jti) {
         const stmt = await database_1.prisma.jwtToken.findFirst({ where: { jti } });
+        return stmt;
+    }
+    async SelectByUid(uId) {
+        const stmt = await database_1.prisma.jwtToken.findFirst({ where: { uId: uId } });
         return stmt;
     }
     async Update(jti) {

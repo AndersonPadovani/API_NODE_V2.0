@@ -8,7 +8,7 @@
     "tsc": "npx tsc --watch",
     "dev": "nodemon ./src/server.js",
     "test": "vitest --ui",
-    "migrations": "npx prisma migrate dev",
+    "migrations": "npx prisma migrate deploy",
     "prisma": "npx prisma studio",
     "build": "prisma generate && npx tsc",
     "start": "nodemon ./src/server.js",
