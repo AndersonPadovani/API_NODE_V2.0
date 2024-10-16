@@ -13,7 +13,10 @@ class JwtToken {
         return stmt;
     }
     async SelectByUid(uId) {
-        const stmt = await database_1.prisma.jwtToken.findFirst({ where: { uId: uId } });
+        const stmt = await database_1.prisma.jwtToken.findFirst({
+            where: { uId: uId },
+            orderBy: { createdAt: "desc" },
+        });
         return stmt;
     }
     async Update(jti) {

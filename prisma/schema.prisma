@@ -27,7 +27,7 @@ model JwtToken {
   id   String @id @unique @default(uuid())
   jti  String @unique
   used Int    @default(0)
-  uId  String @unique 
+  uId  String 
   createdAt DateTime @default(now())
 
   @@map("jwt_token")

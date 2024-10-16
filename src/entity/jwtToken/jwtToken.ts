@@ -22,7 +22,10 @@ export class JwtToken {
   }
 
   async SelectByUid(uId: string) {
-    const stmt = await prisma.jwtToken.findFirst({ where: { uId: uId } });
+    const stmt = await prisma.jwtToken.findFirst({
+      where: { uId: uId },
+      orderBy: { createdAt: "desc" },
+    });
     return stmt;
   }
 
