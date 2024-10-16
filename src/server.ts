@@ -19,7 +19,7 @@ App.use((req, res, next) => {
   const origin = req.headers.origin;
 
   // Verifica se a origem da requisição está na lista de origens permitidas
-  if (allowedOrigins.includes(origin!.toString())) {
+  if (allowedOrigins.includes(`${origin}`)) {
     res.header("Access-Control-Allow-Origin", origin);
   }
 
