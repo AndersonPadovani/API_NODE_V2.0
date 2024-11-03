@@ -1,126 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-</head>
-<body>
-
 <h1>API_NODE_2.0 Documentation</h1>
 
 <h2><a href="https://documenter.getpostman.com/view/9314131/2sA2r824DW">Documentação no Postman</a></h2>
 
-<h2>Introduction</h2>
-<p>This documentation provides details for the API_NODE_2.0.</p>
 
-<h2>Customer</h2>
+# Documentação da API
 
-<h3>selectAllCustommer</h3>
+## Introdução
+A API REST para criação e autenticação de usuários é uma solução robusta e escalável construída com Node.js, projetada para gerenciar o registro e a autenticação de usuários em aplicações web e móveis.
 
-<ul>
-    <li><strong>Method:</strong> GET</li>
-    <li><strong>Authentication:</strong> Bearer Token</li>
-    <li><strong>Token:</strong> <code>&lt;token&gt;</code></li>
-    <li><strong>Request URL:</strong> <code>{{baseUrl}}/user</code></li>
-    <li><strong>Request Body:</strong></li>
-    <pre>
-<code>
-{
+## Endpoints
 
-}
-</code>
-    </pre>
-</ul>
+### 1. Criar Usuário
 
-<h3>createCustommer</h3>
+- **Método**: `POST`
+- **URL**: `/user`
+- **Corpo da Requisição**:
+    ```json
+    {
+        "name": "admin",
+        "email": "admin@admin.com.br",
+        "phone": "(45) 9 9953-0899",
+        "password": "1994"
+    }
+    ```
 
-<ul>
-    <li><strong>Method:</strong> POST</li>
-    <li><strong>Request URL:</strong> <code>{{baseUrl}}/user</code></li>
-    <li><strong>Request Body:</strong></li>
-    <pre>
-<code>
-{
-    "name": "admin",
-    "email": "admin@admin.com.br",
-    "phone": "(45) 9 9953-0899",
-    "password": "1994"
-}
-</code>
-    </pre>
-</ul>
+### 2. Obter Todos os Usuários
 
-<h3>updateCustommer</h3>
+- **Método**: `GET`
+- **URL**: `/user`
+- **Autenticação**: Bearer Token
+- **Cabeçalho**:
+    ```
+    Authorization: Bearer <token>
+    ```
 
-<ul>
-    <li><strong>Method:</strong> PATCH</li>
-    <li><strong>Authentication:</strong> Bearer Token</li>
-    <li><strong>Token:</strong> <code>&lt;token&gt;</code></li>
-    <li><strong>Request URL:</strong> <code>{{baseUrl}}/user</code></li>
-    <li><strong>Request Body:</strong></li>
-    <pre>
-<code>
-{
-    "name": "user",
-    "phone": "",
-    "email": "",
-    "password": ""
-}
-</code>
-    </pre>
-    <li><strong>Response:</strong> In case of a conflict (status 409), the response will be in JSON format with a <code>message</code> key indicating the reason for the conflict.</li>
-    <pre>
-<code>
-{
-    "message": "..."
-}
-</code>
-    </pre>
-</ul>
+### 3. Atualizar Usuário
 
-<h3>deleteCustommer</h3>
+- **Método**: `PATCH`
+- **URL**: `/user`
+- **Autenticação**: Bearer Token
+- **Cabeçalho**:
+    ```
+    Authorization: Bearer <token>
+    ```
+- **Corpo da Requisição**:
+    ```json
+    {
+        "name": "user",
+        "phone": "",
+        "email": "",
+        "password": ""
+    }
+    ```
 
-<ul>
-    <li><strong>Method:</strong> DELETE</li>
-    <li><strong>Request URL:</strong> <code>{{baseUrl}}/user</code></li>
-    <li><strong>Request Body:</strong></li>
-    <pre>
-<code>
-{
-    "id": "2a4b81fe-cec8-4096-a943-8c627291540f"
-}
-</code>
-    </pre>
-    <li><strong>Response:</strong> In case of a conflict (status 409), the response will be in JSON format with a <code>message</code> key indicating the reason for the conflict.</li>
-    <pre>
-<code>
-{
-    "message": "..."
-}
-</code>
-    </pre>
-</ul>
+### 4. Deletar Usuário
 
-<h2>Login</h2>
+- **Método**: `DELETE`
+- **URL**: `/user`
+- **Corpo da Requisição**:
+    ```json
+    {
+        "id": "2a4b81fe-cec8-4096-a943-8c627291540f"
+    }
+    ```
 
-<h3>loginEmail</h3>
+### 5. Login com Email
 
-<ul>
-    <li><strong>Method:</strong> POST</li>
-    <li><strong>Request URL:</strong> <code>{{baseUrl}}/login/email</code></li>
-    <li><strong>Request Body:</strong></li>
-    <pre>
-<code>
-{
-    "email": "admin@admin.com",
-    "password": "admin"
-}
-</code>
-    </pre>
-</ul>
+- **Método**: `POST`
+- **URL**: `/login/email`
+- **Corpo da Requisição**:
+    ```json
+    {
+        "email": "admin@admin.com",
+        "password": "admin"
+    }
+    ```
 
-<h3>loginPhone</h3>
+### 6. Login com Telefone
 
-<ul>
-    <li><strong>Method:</strong> POST</li
+- **Método**: `POST`
+- **URL**: `/login/phone`
+- **Corpo da Requisição**:
+    ```json
+    {
+        "phone": "(45) 9 9953-0899",
+        "password": "admin"
+    }
+    ```
+
+## Conclusão
+Essa API oferece uma série de endpoints que permitem criar, autenticar e gerenciar usuários de forma segura e eficiente.
