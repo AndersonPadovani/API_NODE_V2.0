@@ -5,8 +5,7 @@ import "dotenv/config";
 import { MidErrorsApi } from "./middleware/errors/middlewareErrors";
 
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://login-navy-ten.vercel.app/",
+  "*",
 ];
 
 const PORT = process.env.SERVER_PORT || 5000;
