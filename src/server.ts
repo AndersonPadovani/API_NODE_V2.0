@@ -1,13 +1,13 @@
-import "express-async-errors";
-import express from "express";
-import * as Routers from "./routers/routers";
 import "dotenv/config";
+import express from "express";
+import "express-async-errors";
 import { MidErrorsApi } from "./middleware/errors/middlewareErrors";
+import * as Routers from "./routers/routers";
 
 const allowedOrigins = [
   "http://localhost:3000",
   "https://login-navy-ten.vercel.app",
-  "*",
+  "https://login-git-main-andersonpadovanis-projects.vercel.app",
 ];
 
 const PORT = process.env.SERVER_PORT || 5000;
@@ -26,7 +26,7 @@ App.use((req, res, next) => {
 
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept",
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
