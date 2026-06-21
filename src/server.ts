@@ -5,7 +5,6 @@ import { MidErrorsApi } from "./middleware/errors/middlewareErrors";
 import * as Routers from "./routers/routers";
 
 const allowedOrigins = [
-  "http://localhost:3000",
   "https://login-navy-ten.vercel.app",
   "https://login-git-main-andersonpadovanis-projects.vercel.app",
 ];
